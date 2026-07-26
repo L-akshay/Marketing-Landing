@@ -32,7 +32,62 @@ const HorizontalWords = () => {
             // To make letters start animating as we scroll down from VimeoHero,
             // we start the horizontal movement as soon as the section enters the viewport (top bottom).
             const entranceDistance = window.innerHeight;
-            const pinnedDistance = 2500;
+            /* The pin holds the page still while the words travel sideways.
+               2500px of that on a phone is a long time to be unable to scroll
+               past, so mobile gets a much shorter hold. */
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            const pinnedDistance = isMobile ? 1100 : 2500;
+
+            /* ── Mobile: no pin, no sideways travel ──────────────────────────
+               A horizontal track inside a pinned section means the headline is
+               always partly off-screen and the paragraph gets clipped on both
+               edges. On a phone the section becomes a normal stacked block and
+               the letters simply drop into place as it scrolls into view. */
+            if (isMobile) {
+                gsap.from(letters, {
+                    yPercent: 90,
+                    rotation: () => (Math.random() - 0.5) * 24,
+                    opacity: 0,
+                    ease: 'back.out(1.7)',
+                    stagger: 0.018,
+                    scrollTrigger: {
+                        trigger: container,
+                        start: 'top 72%',
+                        toggleActions: 'play none none reverse',
+                    },
+                });
+
+                gsap.from(stickers, {
+                    scale: 0,
+                    rotation: -28,
+                    ease: 'elastic.out(1, 0.5)',
+                    duration: 1.3,
+                    stagger: 0.12,
+                    scrollTrigger: {
+                        trigger: container,
+                        start: 'top 62%',
+                        toggleActions: 'play none none reverse',
+                    },
+                });
+
+                arrows.forEach((arrowPath) => {
+                    if (!arrowPath.getTotalLength) return;
+                    const pathLen = arrowPath.getTotalLength();
+                    gsap.set(arrowPath, { strokeDasharray: pathLen, strokeDashoffset: pathLen });
+                    gsap.to(arrowPath, {
+                        strokeDashoffset: 0,
+                        duration: 1.2,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: container,
+                            start: 'top 62%',
+                            toggleActions: 'play none none reverse',
+                        },
+                    });
+                });
+
+                return;
+            }
 
             const scrollTween = gsap.timeline({
                 scrollTrigger: {

@@ -529,8 +529,10 @@
         font-size: 1.05rem;
     }
 
+    /* Kept small enough that the CTAs above it stay the focus, and the whole
+       composition still lands within one scroll of the headline. */
     .hero-sys__board {
-        max-width: 330px;
+        max-width: 300px;
     }
 
     /* Fewer nodes on a small screen: the third stage and its two wires drop

@@ -10,6 +10,14 @@
     align-items: center;
     width: 60px;
     height: 55px;
+    /* It is an anchor so it still works without hover (touch). */
+    color: inherit;
+    text-decoration: none;
+}
+
+.logo-whatsapp {
+    color: inherit;
+    text-decoration: none;
 }
 
 .nav-bar__work-blob-svg {

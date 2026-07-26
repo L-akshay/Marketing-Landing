@@ -42,6 +42,19 @@
     }
 }
 
+/* ─── Touch devices ──────────────────────────────────────────────────────────
+   The navbar pop-outs are hover-driven, so on a touch screen they can never be
+   opened. Hide them and let the "work" and WhatsApp elements act as the plain
+   links they already are, rather than leaving two dead controls in the header.
+─────────────────────────────────────────────────────────────────────────── */
+@media (hover: none) {
+
+    .nav-popout,
+    .nav-overlay {
+        display: none !important;
+    }
+}
+
 /* ─── Mobile (≤ 768px) ───────────────────────────────────────────────────── */
 @media (max-width: 768px) {
 
@@ -66,6 +79,237 @@
 
     .nav-bar__whatsapp-svg {
         width: 26px;
+    }
+
+    /* Both header controls are links now — give them a real tap target. */
+    .logo-work-container,
+    .logo-whatsapp {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+    }
+
+    .logo-whatsapp {
+        justify-content: flex-end;
+        min-width: 44px;
+    }
+
+    /* The navbar is fixed and was fully transparent, so headings scrolled
+       underneath it and collided with the logo. A blurred plate keeps both
+       legible without changing the layout. */
+    .navbar {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: background-color 0.4s ease, color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .navbar.on-light {
+        background-color: rgba(240, 235, 230, 0.82);
+    }
+
+    .navbar.on-dark {
+        background-color: rgba(17, 17, 17, 0.55);
+    }
+
+    /* ── MotionCards ────────────────────────────────────────────────────────
+       This section had no mobile rules at all: the heading rendered at 7rem
+       with -5px tracking, and the card fan was sized in vw so it collapsed to
+       thumbnails. Rebuilt as a 2×2 tilted grid that keeps the character. */
+    .motion-card-section {
+        padding: 70px 20px 60px;
+    }
+
+    .motion-card__heading {
+        margin-bottom: 36px;
+    }
+
+    /* Fluid so "business runs." cannot clip on a 360px screen. */
+    .motion-card__title {
+        font-size: clamp(1.85rem, 8.4vw, 2.7rem);
+        letter-spacing: -1.4px;
+        line-height: 0.95;
+    }
+
+    .motion-card__subtitle {
+        font-size: clamp(1.75rem, 7.8vw, 2.5rem);
+        letter-spacing: -0.8px;
+        top: -4px;
+    }
+
+    /* Absolute positioning put this over the headline's second line. Inline
+       after the subtitle it sits where there is actually room. */
+    .motion-card__sticker--top {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        top: -2px;
+        right: auto;
+        width: 56px;
+        height: auto;
+        margin-left: 8px;
+    }
+
+    .motion-card__sticker--top img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* No negative pull on mobile — it dragged the squiggle up underneath the
+       sticker so the two sat on top of each other. */
+    .motion-card__underline-svg {
+        max-width: 240px;
+        margin: 6px auto 0;
+    }
+
+    .motion-card__cards-area {
+        height: auto;
+        margin: 28px auto 44px;
+    }
+
+    /* Sits behind the grid, where it now shows through the gaps — kept faint
+       so it reads as a wash rather than a stray shape. */
+    .motion-card__blob {
+        width: 240px;
+        height: 220px;
+        transform: translate(-50%, -50%);
+        opacity: 0.4;
+    }
+
+    .motion-card__cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        height: auto;
+    }
+
+    /* Reset the desktop fan offsets; the per-card rotation is kept. */
+    .motion-card__card {
+        width: 100%;
+        height: 42vw;
+        max-height: 200px;
+        margin-right: 0;
+        left: auto;
+        bottom: auto;
+    }
+
+    /* ±6° on neighbouring grid cells made the corners collide. */
+    .motion-card__card--1 {
+        transform: rotate(-2.5deg);
+    }
+
+    .motion-card__card--2 {
+        transform: rotate(2.5deg);
+    }
+
+    .motion-card__card--3 {
+        transform: rotate(-2deg);
+    }
+
+    .motion-card__card--4 {
+        transform: rotate(2deg);
+    }
+
+    .motion-card__floating-label {
+        padding: 4px 12px;
+    }
+
+    .motion-card__floating-text {
+        font-size: 0.82rem;
+    }
+
+    /* Repositioned so no label sits half off-screen. */
+    .motion-card__floating-label--pink {
+        top: -4%;
+        left: 32%;
+    }
+
+    .motion-card__floating-label--orange {
+        top: 50%;
+        left: 52%;
+    }
+
+    .motion-card__floating-label--red {
+        top: 104%;
+        left: 50%;
+    }
+
+    .motion-card__description {
+        font-size: 1.05rem;
+        line-height: 1.55;
+    }
+
+    /* ── HorizontalWords — static on mobile ─────────────────────────────────
+       The desktop version rides a horizontal track inside a pinned section.
+       On a phone that guarantees the headline is always partly off-screen and
+       the paragraph gets clipped at both edges, so here it becomes an ordinary
+       centred block. The JS drops the pin and the sideways travel to match. */
+    .horizontal-words-section {
+        height: auto;
+        padding: 90px 20px 80px;
+        overflow: visible;
+    }
+
+    .horizontal-words__relative {
+        position: relative;
+        top: auto;
+        transform: none;
+        padding: 0;
+        display: block;
+        white-space: normal;
+        text-align: center;
+    }
+
+    .horizontal-words__h2 {
+        font-size: 12.5vw;
+        line-height: 1.02;
+        white-space: normal;
+        overflow-wrap: break-word;
+    }
+
+    /* Stickers were placed for a wide horizontal track; re-anchor them to the
+       stacked headline instead of letting them drift off-canvas. */
+    .horizontal-words__sticker-watch {
+        width: 3.6em;
+        top: -8%;
+        left: 16%;
+        transform: translate(-50%, -50%);
+    }
+
+    .horizontal-words__sticker-cursor {
+        width: 4em;
+        top: auto;
+        bottom: -6%;
+        left: 78%;
+        transform: translate(-50%, 0);
+    }
+
+    .horizontal-words__sticker-phone {
+        width: 4.2em;
+        top: -6%;
+        left: 84%;
+        transform: translate(-50%, -50%);
+    }
+
+    /* The long curved arrows only make sense across a wide track. */
+    .horizontal-words__arrow-svg,
+    .horizontal-words__arrow-end-svg {
+        display: none;
+    }
+
+    .horizontal-words__bottom-text {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        max-width: 420px;
+        margin: 40px auto 0;
+    }
+
+    .horizontal-words__bottom-text-l {
+        font-size: 0.98rem;
+        line-height: 1.5;
+        max-width: 100%;
     }
 
     /* ── Header Hero ────────────────── */
@@ -99,20 +343,45 @@
         margin-bottom: 50px;
     }
 
-    /* ── Cards (GSAP-controlled) ─────── */
+    /* ── Service cards — vertical stack ───────────────────────────────────
+       No pinning, no absolute positioning. Each card is a normal block, so it
+       cannot end up half off-screen; GSAP only fades and tilts them in. */
     .cards-wrapper {
         position: relative !important;
-        display: block !important;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        gap: 26px;
         width: 100% !important;
+        height: auto !important;
         margin: 0 auto !important;
+        padding-bottom: 20px;
         overflow: visible !important;
     }
 
     .card {
-        width: 82vw;
-        max-width: 340px;
-        min-height: 420px;
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+        width: 86vw;
+        max-width: 360px;
+        min-height: 0;
         height: auto;
+        padding: 3rem 1.4rem 1.6rem;
+    }
+
+    .card-title {
+        font-size: 1.9rem;
+        margin-top: 18px;
+    }
+
+    .card-list li {
+        font-size: 1.02rem;
+        margin-bottom: 6px;
+    }
+
+    .card-sticker {
+        pointer-events: none;
     }
 
     .card-sticker {
@@ -147,23 +416,24 @@
         margin-right: 0;
     }
 
+    /* Was anchored at left:20%, which pushed half the blob off the screen. */
     .marquee-blob-container {
-        width: 240px;
-        height: 280px;
-        top: 45%;
-        left: 20%;
+        width: 230px;
+        height: 250px;
+        top: 52%;
+        left: 50%;
     }
 
     .marquee-svg-item:nth-child(1) {
-        width: 60px;
-        bottom: 10%;
-        left: 55%;
+        width: 58px;
+        bottom: 16%;
+        left: 60%;
     }
 
     .marquee-svg-item:nth-child(2) {
-        width: 220px;
-        bottom: -5%;
-        left: 55%;
+        width: 170px;
+        bottom: 0%;
+        left: 58%;
     }
 
     .marquee-underline {
@@ -173,29 +443,33 @@
         width: 70px;
     }
 
-    /* ── Logo columns → 2-row horizontal scroll grid ── */
+    /* ── Capability words → wrapping pills ──────────────────────────────────
+       This used to be a two-row horizontal scroll grid of fixed 130px squares.
+       With words instead of logos it cut them mid-word ("ai sys…", "integra…")
+       and the half-visible third column read as a broken layout rather than a
+       scrollable one. Now they wrap to fill the width as speech-bubble pills,
+       which is the shape the badges and cards already use. */
     .marquee-right {
-        display: grid;
-        grid-template-rows: 130px 130px;
-        grid-auto-flow: column;
-        grid-auto-columns: 130px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
         gap: 8px;
         width: 100%;
         height: auto;
         margin-right: 0;
-        padding: 20px 24px 32px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-    }
-
-    .marquee-right::-webkit-scrollbar {
-        display: none;
+        padding: 24px 20px 40px;
+        overflow: visible;
     }
 
     .marquee-column {
         display: contents;
+    }
+
+    /* The second track is a duplicate set — fine for an infinite loop, but it
+       would just repeat itself in a wrapping layout. */
+    .marquee-right > .marquee-column:nth-child(2) {
+        display: none;
     }
 
     .marquee-column::before,
@@ -203,16 +477,25 @@
         display: none;
     }
 
-    .marquee-column:nth-child(1) .marquee-track,
-    .marquee-column:nth-child(2) .marquee-track {
+    .marquee-column:nth-child(1) .marquee-track {
         display: contents;
         animation: none;
     }
 
     .marquee-item {
-        width: 130px;
-        height: 130px;
-        flex-shrink: 0;
+        width: auto;
+        height: auto;
+        flex: 0 0 auto;
+        border-radius: 20px;
+        border-bottom-left-radius: 1px;
+    }
+
+    .marquee-word {
+        width: auto;
+        height: auto;
+        padding: 11px 18px;
+        font-size: 1rem;
+        white-space: nowrap;
     }
 
     /* ── Footer ─────────────────────── */
@@ -290,9 +573,53 @@
         width: 85px;
     }
 
-    /* ── Footer wordmark ────────────── */
+    /* ── Footer wordmark ──────────────
+       The stickers are absolutely positioned against .footer-bottom, which on
+       mobile is only as tall as the wordmark — so they used to pile on top of
+       each other. Laid out as a contained row instead; each sticker keeps its
+       own rotation. */
     .footer-bottom {
-        margin-top: 200px;
+        margin-top: 56px;
+    }
+
+    .footer-stickers {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        height: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 10px 14px;
+        margin-bottom: 26px;
+    }
+
+    .footer-stickers .footer-sticker {
+        position: relative;
+        left: auto;
+        right: auto;
+        top: auto;
+        bottom: auto;
+        width: 52px;
+    }
+
+    .footer-big-text {
+        margin-bottom: -6px;
+    }
+
+    .footer-line {
+        font-size: 1.15rem;
+    }
+
+    .footer-legal {
+        gap: 4px 14px;
+    }
+
+    .footer-legal a,
+    .footer-legal span {
+        font-size: 0.82rem;
     }
 
     .footer-logo__svg {

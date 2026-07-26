@@ -58,15 +58,32 @@ body {
     background-color: var(--bg-color);
     font-family: 'Epilogue', sans-serif;
     color: var(--color-dark);
-    overflow-x: hidden;
     scrollbar-width: none;
     -ms-overflow-style: none;
     cursor: url("/assets/Cursor SVG/cursor-default.svg") 2 0, auto;
 }
 
+/* `clip` rather than `hidden`: it stops sideways scrolling without turning the
+   element into a scroll container, which would break ScrollTrigger's pinning.
+   Applied to html as well — overflow-x on body alone still let the document
+   scroll sideways. */
+html,
+body {
+    overflow-x: clip;
+    max-width: 100%;
+}
+
 html {
     scrollbar-width: none;
     -ms-overflow-style: none;
+    /* Stop iOS inflating type when the phone is turned sideways. */
+    -webkit-text-size-adjust: 100%;
+}
+
+/* Removes the grey flash on tap without killing the :active states. */
+a,
+button {
+    -webkit-tap-highlight-color: transparent;
 }
 
 html::-webkit-scrollbar,

@@ -190,7 +190,7 @@ export default function MotionCards() {
                         <p className="motion-card__floating-text">automate the boring bits</p>
                     </div>
                     <div className="motion-card__floating-label motion-card__floating-label--red">
-                        <p className="motion-card__floating-text">a pretty site that converts nothing is a poster</p>
+                        <p className="motion-card__floating-text">pretty ≠ converting</p>
                     </div>
                 </div>
             </div>

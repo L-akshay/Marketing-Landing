@@ -140,46 +140,28 @@ function initCardAnimations() {
             });
         });
     } else {
-        // ─── Mobile: Stacked card scroll reveal ───
-        const cardsWrapper = document.querySelector('.cards-wrapper');
-        const scrollPerCard = window.innerHeight * 0.8;
-        const navH = 60;
-        const mobileRotations = [-6, 4, -8, 5, -3];
+        /* ─── Mobile: a plain vertical stack ───────────────────────────────
+           The pinned version placed every card absolutely and held the page
+           for roughly three screens. On a phone that read as broken — cards
+           overlapped and sat half off the left edge. Layout is now pure CSS
+           and GSAP only handles the reveal, so nothing depends on measuring
+           the viewport at load. */
+        const mobileRotations = [-3, 2.5, -2, 3, -2.5];
 
         cards.forEach((card, i) => {
-            gsap.set(card, {
-                position: 'absolute', left: '50%', top: '0', xPercent: -50,
-                y: i === 0 ? 0 : window.innerHeight * 1.1,
-                rotation: mobileRotations[i % mobileRotations.length],
-                zIndex: i + 1,
-                transformOrigin: 'center center'
-            });
-        });
-
-        const wrapperH = window.innerHeight * 0.7 + scrollPerCard * (cards.length - 1);
-        gsap.set(cardsWrapper, { height: wrapperH });
-
-        ScrollTrigger.create({
-            trigger: cardsWrapper,
-            start: `top ${navH}px`,
-            end: `+=${scrollPerCard * (cards.length - 1)}`,
-            pin: true,
-            pinSpacing: true,
-            id: 'mobile-cards-pin'
-        });
-
-        cards.forEach((card, i) => {
-            if (i === 0) return;
-            gsap.fromTo(card,
-                { y: window.innerHeight * 1.1 },
+            gsap.fromTo(
+                card,
+                { y: 48, opacity: 0, rotation: 0 },
                 {
                     y: 0,
-                    ease: 'power3.out',
+                    opacity: 1,
+                    rotation: mobileRotations[i % mobileRotations.length],
+                    duration: 1.1,
+                    ease: 'elastic.out(1, 0.75)',
                     scrollTrigger: {
-                        trigger: cardsWrapper,
-                        start: `top+=${(i - 1) * scrollPerCard} ${navH}px`,
-                        end: `top+=${i * scrollPerCard} ${navH}px`,
-                        scrub: 0.4
+                        trigger: card,
+                        start: 'top 88%',
+                        toggleActions: 'play none none reverse'
                     }
                 }
             );

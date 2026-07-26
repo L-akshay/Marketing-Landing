@@ -7,6 +7,29 @@
    the sections' existing layout and interactions untouched.
 ─────────────────────────────────────────────────────────────────────────── */
 
+/* ─── Motion card layout ─────────────────────────────────────────────────────
+   The original fan used negative margins so photographs overlapped into a
+   stack. Flat colour tiles do not read that way — overlapping solids just look
+   like broken shapes — so the cards get real spacing. The per-card rotation and
+   vertical stagger, which is what gives the row its character, is untouched.
+─────────────────────────────────────────────────────────────────────────── */
+.motion-card__cards {
+    gap: clamp(14px, 1.8vw, 26px);
+}
+
+.motion-card__card--1,
+.motion-card__card--2,
+.motion-card__card--3,
+.motion-card__card--4 {
+    margin-right: 0;
+    left: auto;
+}
+
+.motion-card__card {
+    border-radius: 14px;
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.18);
+}
+
 /* ─── Motion card tiles ─────────────────────────────────────────────────── */
 .motion-card__tile {
     position: relative;
