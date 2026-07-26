@@ -1,0 +1,85 @@
+/* ─── Brand Story ────────────────────────────────────────────────────────────
+   The quiet moment between the service cards and the marquee. Cream on cream,
+   large display type, one italic serif accent — the same treatment the section
+   headings use elsewhere.
+─────────────────────────────────────────────────────────────────────────── */
+.brand-story-section {
+    width: 100%;
+    padding: 160px 40px 120px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-color);
+}
+
+.brand-story__inner {
+    max-width: 900px;
+    text-align: center;
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 12 12, auto;
+}
+
+.brand-story__eyebrow {
+    display: inline-block;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    font-weight: 450;
+    text-transform: lowercase;
+    padding: 8px 15px;
+    margin-bottom: 32px;
+    color: var(--color-white);
+    background: var(--color-green);
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+}
+
+.brand-story__title {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(2.4rem, 5.5vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -2.5px;
+    color: var(--color-black);
+    text-transform: lowercase;
+    margin-bottom: 32px;
+}
+
+.brand-story__copy {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: -0.2px;
+    color: var(--color-dark);
+    opacity: 0.78;
+    max-width: 46rem;
+    margin: 0 auto 28px;
+}
+
+.brand-story__line {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+    color: var(--color-black);
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .brand-story-section {
+        padding: 90px 24px 70px;
+    }
+
+    .brand-story__title {
+        letter-spacing: -1.2px;
+        margin-bottom: 24px;
+    }
+
+    .brand-story__copy {
+        font-size: 1.05rem;
+    }
+
+    .brand-story__line {
+        font-size: 1.2rem;
+    }
+}

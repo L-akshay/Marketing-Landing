@@ -1,0 +1,601 @@
+/* ─── Hero System ───────────────────────────────────────────────────────────
+   The homepage hero. Inherits the site's shell language exactly: a dark card
+   floating on the cream page with 12px of breathing room and a 24px radius,
+   the same geometry the video hero and the footer already use.
+
+   Animation convention matches the rest of the site — CSS holds the "before"
+   state, GSAP animates to the "after" state. Nothing flashes, and the
+   reduced-motion block at the bottom resolves every element on its own.
+─────────────────────────────────────────────────────────────────────────── */
+
+.hero-sys {
+    position: relative;
+    width: calc(100% - 24px);
+    min-height: calc(100vh - 24px);
+    margin: 12px auto;
+    padding: 120px 44px 60px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    background-color: var(--color-black-soft);
+    border-radius: 24px;
+}
+
+/* Soft colour bleeding up from behind — the same blob motif used by the
+   motion-cards and marquee sections, just diffused. */
+.hero-sys__glow {
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 120%;
+    pointer-events: none;
+    background:
+        radial-gradient(38% 42% at 14% 26%, rgba(41, 114, 95, 0.55), transparent 68%),
+        radial-gradient(34% 40% at 86% 12%, rgba(75, 105, 240, 0.45), transparent 70%),
+        radial-gradient(30% 36% at 74% 82%, rgba(245, 105, 60, 0.32), transparent 72%),
+        radial-gradient(26% 30% at 34% 92%, rgba(240, 190, 250, 0.24), transparent 74%);
+    filter: blur(14px);
+}
+
+.hero-sys__inner {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1560px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    align-items: center;
+    gap: 60px;
+}
+
+/* ─── Copy ──────────────────────────────────────────────────────────────── */
+.hero-sys__copy {
+    max-width: 46rem;
+}
+
+.hero-sys__eyebrow {
+    display: inline-block;
+    font-family: 'Epilogue', Arial, sans-serif;
+    padding: 8px 15px;
+    margin-bottom: 28px;
+    background: var(--color-white);
+    color: var(--color-black);
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+    font-size: 1rem;
+    font-weight: 450;
+    width: fit-content;
+    text-transform: lowercase;
+    /* before-state */
+    opacity: 0;
+    transform: scale(0.4) rotate(-14deg);
+    transform-origin: left center;
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 12 12, auto;
+}
+
+.hero-sys__title {
+    font-family: 'Epilogue', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 5.4vw, 5.6rem);
+    line-height: 1;
+    letter-spacing: -3px;
+    color: var(--color-white);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 0.16em;
+    margin-bottom: 32px;
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 2 0, text;
+}
+
+.hero-sys__title * {
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 2 0, text;
+}
+
+.hero-sys__word {
+    display: inline-block;
+    /* before-state */
+    opacity: 0;
+    transform: translateY(46px);
+}
+
+.hero-sys__word.is--relative {
+    position: relative;
+}
+
+.hero-sys__break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+/* Italic serif highlight — the same treatment "advertising" and "need:" get. */
+.hero-sys__title em {
+    font-family: 'Times New Roman', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: var(--color-lightgreen);
+}
+
+/* Hand-drawn oval around the last word. */
+.hero-sys__underline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 122%;
+    height: 132%;
+    color: var(--color-orange);
+    overflow: visible;
+    pointer-events: none;
+}
+
+.hero-sys__underline path {
+    stroke-dasharray: 720;
+    stroke-dashoffset: 720;
+}
+
+.hero-sys__star {
+    position: absolute;
+    top: -0.42em;
+    right: -0.5em;
+    width: 0.62em;
+    height: 0.62em;
+    pointer-events: none;
+    z-index: 3;
+    /* before-state */
+    opacity: 0;
+    transform: scale(0) rotate(-40deg);
+}
+
+.hero-sys__smiley {
+    position: absolute;
+    top: -0.52em;
+    left: 0.1em;
+    width: 0.7em;
+    height: 0.7em;
+    pointer-events: none;
+    z-index: 3;
+    /* before-state */
+    opacity: 0;
+    transform: scale(0) rotate(-45deg);
+}
+
+.hero-sys__star img,
+.hero-sys__smiley img {
+    width: 100%;
+    height: 100%;
+}
+
+.hero-sys__lede {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -0.2px;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 34rem;
+    margin-bottom: 34px;
+    /* before-state */
+    opacity: 0;
+    transform: translateY(24px);
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 12 12, auto;
+}
+
+/* ─── Actions ───────────────────────────────────────────────────────────── */
+.hero-sys__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 22px;
+}
+
+.hero-sys__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 28px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    text-transform: lowercase;
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease,
+        color 0.25s ease,
+        transform 0.2s ease;
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+    /* before-state */
+    opacity: 0;
+    transform: translateY(22px);
+}
+
+.hero-sys__btn--primary {
+    background: var(--color-white);
+    color: var(--color-black);
+    border: 1.5px solid var(--color-white);
+}
+
+.hero-sys__btn--primary:hover {
+    background: var(--color-lightgreen);
+    border-color: var(--color-lightgreen);
+    transform: translateY(-2px);
+}
+
+/* Glassy secondary — lifted straight from the hero's own control buttons. */
+.hero-sys__btn--ghost {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    color: var(--color-white);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.hero-sys__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.7);
+    transform: translateY(-2px);
+}
+
+.hero-sys__micro {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.45);
+    /* before-state */
+    opacity: 0;
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 12 12, auto;
+}
+
+/* ─── Visual ────────────────────────────────────────────────────────────── */
+.hero-sys__visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-sys__board {
+    position: relative;
+    width: 100%;
+    max-width: 470px;
+    aspect-ratio: 400 / 560;
+}
+
+/* — Connectors — */
+.hero-sys__wires {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.34);
+}
+
+.hero-sys__wire-pulse {
+    color: var(--color-lightgreen);
+    opacity: 0.95;
+}
+
+/* Only the mobile shortcut is hidden by default; the rest are shown. */
+.hero-sys__wire--mobile {
+    display: none;
+}
+
+/* — The website — */
+.hero-sys__browser {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 76%;
+    background: var(--bg-color);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 22px 44px rgba(0, 0, 0, 0.42);
+    /* before-state */
+    opacity: 0;
+    transform: scale(0.72) rotate(-14deg);
+}
+
+.hero-sys__browser-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.hero-sys__dots {
+    display: flex;
+    gap: 4px;
+}
+
+.hero-sys__dots i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.22);
+}
+
+.hero-sys__url {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.hero-sys__browser-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px 14px 16px;
+}
+
+.hero-sys__skeleton--head {
+    display: block;
+    width: 58%;
+    height: 12px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.16);
+}
+
+.hero-sys__tiles {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 100%;
+}
+
+.hero-sys__tile {
+    display: block;
+    height: 46px;
+    border-radius: 8px;
+}
+
+.hero-sys__tile--a {
+    background: var(--color-green);
+}
+
+.hero-sys__tile--b {
+    background: var(--color-orange);
+}
+
+.hero-sys__tile--c {
+    background: var(--color-lightblue);
+}
+
+.hero-sys__shop {
+    display: inline-block;
+    padding: 7px 14px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--color-white);
+    background: var(--color-darkblue);
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+}
+
+/* — Workflow nodes — */
+.hero-sys__node {
+    position: absolute;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    white-space: nowrap;
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.32);
+    /* before-state */
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+}
+
+.hero-sys__node-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.55;
+    flex-shrink: 0;
+}
+
+.hero-sys__node--enquiry {
+    top: 39%;
+    right: 0;
+    background: var(--color-orange);
+    color: var(--color-dark);
+}
+
+.hero-sys__node--data {
+    top: 56.5%;
+    left: 2%;
+    background: var(--color-lightblue);
+    color: var(--color-dark);
+}
+
+.hero-sys__node--flow {
+    top: 73%;
+    right: 4%;
+    background: var(--color-pink);
+    color: var(--color-dark);
+}
+
+/* — Outcome — */
+.hero-sys__outcome {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.12rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    white-space: nowrap;
+    color: var(--color-dark);
+    background: var(--color-lightgreen);
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+    box-shadow: 0 18px 34px rgba(0, 0, 0, 0.38);
+    /* before-state */
+    opacity: 0;
+    transform: scale(0.5) rotate(-8deg);
+}
+
+.hero-sys__outcome-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    color: var(--color-lightgreen);
+    background: var(--color-green);
+    border-radius: 50%;
+}
+
+/* ─── Tablet ────────────────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+    .hero-sys {
+        min-height: auto;
+        padding: 110px 28px 48px;
+    }
+
+    .hero-sys__inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+    }
+
+    .hero-sys__copy {
+        max-width: 100%;
+    }
+
+    .hero-sys__board {
+        max-width: 400px;
+    }
+}
+
+/* ─── Mobile ────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .hero-sys {
+        width: calc(100% - 12px);
+        margin: 6px auto;
+        padding: 96px 20px 40px;
+        border-radius: 16px;
+    }
+
+    .hero-sys__inner {
+        gap: 40px;
+    }
+
+    .hero-sys__eyebrow {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+        margin-bottom: 20px;
+    }
+
+    .hero-sys__title {
+        font-size: 2.5rem;
+        letter-spacing: -1.6px;
+        margin-bottom: 22px;
+    }
+
+    .hero-sys__lede {
+        font-size: 1rem;
+        margin-bottom: 26px;
+    }
+
+    /* Full-width, thumb-friendly, and still above the visual. */
+    .hero-sys__actions {
+        gap: 10px;
+    }
+
+    .hero-sys__btn {
+        flex: 1 1 100%;
+        padding: 15px 22px;
+        font-size: 1.05rem;
+    }
+
+    .hero-sys__board {
+        max-width: 330px;
+    }
+
+    /* Fewer nodes on a small screen: the third stage and its two wires drop
+       out, and the mobile shortcut carries the flow to the outcome. */
+    .hero-sys__node--flow,
+    .hero-sys__wire--3,
+    .hero-sys__wire--4 {
+        display: none;
+    }
+
+    .hero-sys__wire--mobile {
+        display: block;
+    }
+
+    .hero-sys__node {
+        font-size: 0.85rem;
+        padding: 7px 13px;
+    }
+
+    .hero-sys__outcome {
+        font-size: 0.95rem;
+        padding: 11px 16px;
+    }
+
+    .hero-sys__browser {
+        width: 80%;
+    }
+}
+
+@media (max-width: 380px) {
+    .hero-sys__title {
+        font-size: 2.15rem;
+    }
+
+    .hero-sys__board {
+        max-width: 280px;
+    }
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────────────────
+   Everything resolves to its finished state and nothing loops. GSAP checks the
+   same query and bails out entirely, so these rules are never overwritten.
+─────────────────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+
+    .hero-sys__eyebrow,
+    .hero-sys__word,
+    .hero-sys__lede,
+    .hero-sys__btn,
+    .hero-sys__micro,
+    .hero-sys__star,
+    .hero-sys__smiley,
+    .hero-sys__browser,
+    .hero-sys__node,
+    .hero-sys__outcome {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .hero-sys__underline path {
+        stroke-dashoffset: 0 !important;
+    }
+
+    /* No travelling signals — the wires simply exist. */
+    .hero-sys__wire-pulse {
+        display: none;
+    }
+}

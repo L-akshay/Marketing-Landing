@@ -1,0 +1,677 @@
+/* ─── Sub-pages ──────────────────────────────────────────────────────────────
+   Shared layout for /about, /services, /contact and the legal pages, plus the
+   project enquiry form. Same shell language as the homepage: cream page, dark
+   rounded cards, speech-bubble pills, Epilogue display type.
+─────────────────────────────────────────────────────────────────────────── */
+.page-shell {
+    width: 100%;
+    background-color: var(--bg-color);
+    padding: 12px;
+}
+
+/* ─── Top bar ───────────────────────────────────────────────────────────── */
+.page-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 18px 32px;
+}
+
+.page-topbar__logo {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: -1.4px;
+    text-transform: lowercase;
+    color: var(--color-black);
+    text-decoration: none;
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+}
+
+.page-topbar__cta {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: lowercase;
+    text-decoration: none;
+    padding: 10px 18px;
+    color: var(--color-white);
+    background: var(--color-black);
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+    transition: background 0.25s ease, transform 0.2s ease;
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+}
+
+.page-topbar__cta:hover {
+    background: var(--color-darkblue);
+    transform: translateY(-2px);
+}
+
+/* ─── Hero card ─────────────────────────────────────────────────────────── */
+.page-hero {
+    background: var(--color-black-soft);
+    border-radius: 24px;
+    padding: 100px 44px;
+    margin-bottom: 12px;
+}
+
+.page-hero__inner {
+    max-width: 1100px;
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 12 12, auto;
+}
+
+.page-hero__eyebrow {
+    display: inline-block;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    font-weight: 450;
+    text-transform: lowercase;
+    padding: 8px 15px;
+    margin-bottom: 28px;
+    color: var(--color-black);
+    background: var(--color-white);
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+}
+
+.page-hero__title {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -3px;
+    text-transform: lowercase;
+    color: var(--color-white);
+    margin-bottom: 24px;
+}
+
+.page-hero__title .accent,
+.page-hero__title .italic-text {
+    font-family: 'Times New Roman', Georgia, serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: var(--color-lightgreen);
+}
+
+.page-hero__lede {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 44rem;
+}
+
+/* ─── Body ──────────────────────────────────────────────────────────────── */
+.page-body {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 32px 40px;
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 12 12, auto;
+}
+
+.page-section {
+    margin-bottom: 56px;
+}
+
+.page-section h2 {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -1.2px;
+    text-transform: lowercase;
+    color: var(--color-black);
+    margin-bottom: 18px;
+}
+
+.page-section h3 {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-transform: lowercase;
+    margin: 24px 0 10px;
+}
+
+.page-section p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--color-dark);
+    opacity: 0.82;
+    max-width: 62rem;
+    margin-bottom: 14px;
+}
+
+.page-section a {
+    color: var(--color-darkblue);
+    font-weight: 600;
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+}
+
+.page-section ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.page-section ul li {
+    position: relative;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.45;
+    color: var(--color-dark);
+    opacity: 0.82;
+    padding-left: 22px;
+}
+
+.page-section ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-orange);
+}
+
+.page-meta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--color-dark);
+    opacity: 0.55;
+    margin-bottom: 40px;
+}
+
+/* ─── Cards grid ────────────────────────────────────────────────────────── */
+.page-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+    margin-top: 24px;
+}
+
+.page-card {
+    padding: 26px 24px;
+    border-radius: 16px;
+    background: var(--color-white);
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.page-card--green {
+    background: var(--color-green);
+    color: var(--color-white);
+    border-color: transparent;
+}
+
+.page-card--blue {
+    background: var(--color-lightblue);
+    border-color: transparent;
+}
+
+.page-card--orange {
+    background: var(--color-orange);
+    border-color: transparent;
+}
+
+.page-card--lightgreen {
+    background: var(--color-lightgreen);
+    border-color: transparent;
+}
+
+.page-card--pink {
+    background: var(--color-pink);
+    border-color: transparent;
+}
+
+.page-card__step {
+    display: inline-block;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    opacity: 0.6;
+    margin-bottom: 10px;
+}
+
+.page-card h3 {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+    text-transform: lowercase;
+    margin: 0 0 8px;
+}
+
+.page-card p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.45;
+    opacity: 0.85;
+    margin: 0;
+}
+
+/* ─── Page CTA ──────────────────────────────────────────────────────────── */
+.page-cta {
+    background: var(--color-darkblue);
+    border-radius: 24px;
+    padding: 80px 44px;
+    margin-top: 40px;
+    text-align: center;
+    color: var(--color-white);
+}
+
+.page-cta h2 {
+    font-family: 'Epilogue', sans-serif;
+    font-size: clamp(1.9rem, 4vw, 3rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -1.6px;
+    text-transform: lowercase;
+    margin-bottom: 16px;
+}
+
+.page-cta p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    opacity: 0.85;
+    max-width: 40rem;
+    margin: 0 auto 30px;
+}
+
+.page-cta__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.page-cta__btn {
+    display: inline-block;
+    padding: 15px 26px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-transform: lowercase;
+    text-decoration: none;
+    color: var(--color-black);
+    background: var(--color-white);
+    border: 1.5px solid var(--color-white);
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+    transition: background 0.25s ease, transform 0.2s ease;
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+}
+
+.page-cta__btn:hover {
+    background: var(--color-lightgreen);
+    border-color: var(--color-lightgreen);
+    transform: translateY(-2px);
+}
+
+.page-cta__btn--ghost {
+    background: transparent;
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.page-cta__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--color-white);
+    color: var(--color-white);
+}
+
+/* ─── Page footer ───────────────────────────────────────────────────────── */
+.page-foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 40px 32px 24px;
+}
+
+.page-foot__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+}
+
+.page-foot__links a {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--color-dark);
+    opacity: 0.7;
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+}
+
+.page-foot__links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.page-foot__brand {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--color-dark);
+    opacity: 0.55;
+}
+
+/* ─── Project enquiry form ──────────────────────────────────────────────────
+   Posts to /api/audit. Validation is shared with the server via
+   lib/audit-schema.js.
+─────────────────────────────────────────────────────────────────────────── */
+.audit-form {
+    background: var(--color-white);
+    border: 1.5px solid rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+    padding: 34px 30px;
+    margin-top: 26px;
+}
+
+.audit-form--loading {
+    min-height: 520px;
+}
+
+.audit-form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+}
+
+.field--wide {
+    grid-column: 1 / -1;
+}
+
+.field label {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    text-transform: lowercase;
+    color: var(--color-black);
+}
+
+.field__req {
+    color: var(--color-orange);
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 13px 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--color-dark);
+    background: var(--bg-color);
+    border: 1.5px solid rgba(0, 0, 0, 0.14);
+    border-radius: 12px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: url("/assets/Cursor SVG/cursor-text.svg") 12 12, auto;
+}
+
+.field select {
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.5;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: var(--color-darkblue);
+    box-shadow: 0 0 0 3px rgba(75, 105, 240, 0.18);
+}
+
+.field input[aria-invalid='true'],
+.field select[aria-invalid='true'],
+.field textarea[aria-invalid='true'] {
+    border-color: var(--color-maroon);
+}
+
+.field__hint {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-dark);
+    opacity: 0.55;
+    line-height: 1.4;
+}
+
+/* Errors carry a mark as well as colour — never colour alone. */
+.field__error {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-maroon);
+    line-height: 1.4;
+}
+
+.field__error::before {
+    content: '!';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: var(--color-white);
+    background: var(--color-maroon);
+    border-radius: 50%;
+}
+
+/* Honeypot: off-screen rather than display:none, which bots skip. */
+.audit-form__trap {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.audit-form__alert {
+    margin-top: 20px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--color-white);
+    background: var(--color-maroon);
+    border-radius: 12px;
+}
+
+.audit-form__foot {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 26px;
+    padding-top: 24px;
+    border-top: 1.5px solid rgba(0, 0, 0, 0.08);
+}
+
+.audit-form__foot .btn {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 28px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-transform: lowercase;
+    color: var(--color-white);
+    background: var(--color-black);
+    border-radius: 20px;
+    border-bottom-left-radius: 1px;
+    transition: background 0.25s ease, transform 0.2s ease;
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+}
+
+.audit-form__foot .btn:hover:not(:disabled) {
+    background: var(--color-darkblue);
+    transform: translateY(-2px);
+}
+
+.audit-form__foot .btn:disabled {
+    opacity: 0.6;
+}
+
+.audit-form__consent {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--color-dark);
+    opacity: 0.55;
+    line-height: 1.5;
+    max-width: 46rem;
+}
+
+.spinner {
+    width: 15px;
+    height: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-top-color: var(--color-white);
+    border-radius: 50%;
+    animation: audit-spin 0.7s linear infinite;
+}
+
+@keyframes audit-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ─── Success state ─────────────────────────────────────────────────────── */
+.audit-form--done {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    background: var(--color-lightgreen);
+    border-color: transparent;
+    min-height: 300px;
+    justify-content: center;
+}
+
+.audit-form--done:focus {
+    outline: none;
+}
+
+.audit-form__done-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    color: var(--color-lightgreen);
+    background: var(--color-green);
+    border-radius: 50%;
+}
+
+.audit-form--done h3 {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.9rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    text-transform: lowercase;
+    color: var(--color-black);
+}
+
+.audit-form--done p {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+    color: var(--color-dark);
+    opacity: 0.85;
+    max-width: 46rem;
+}
+
+.audit-form--done .note {
+    font-size: 0.92rem;
+    opacity: 0.65;
+}
+
+/* ─── Responsive ────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .page-shell {
+        padding: 6px;
+    }
+
+    .page-topbar {
+        padding: 14px 16px;
+    }
+
+    .page-topbar__logo {
+        font-size: 1.4rem;
+    }
+
+    .page-hero {
+        padding: 70px 22px;
+        border-radius: 16px;
+    }
+
+    .page-hero__title {
+        letter-spacing: -1.5px;
+    }
+
+    .page-hero__lede {
+        font-size: 1.05rem;
+    }
+
+    .page-body {
+        padding: 50px 20px 30px;
+    }
+
+    .page-cta {
+        padding: 60px 22px;
+        border-radius: 16px;
+    }
+
+    .page-cta__btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .page-foot {
+        padding: 30px 20px 20px;
+    }
+
+    .audit-form {
+        padding: 24px 20px;
+    }
+
+    .audit-form__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .audit-form__foot .btn {
+        align-self: stretch;
+        justify-content: center;
+    }
+}

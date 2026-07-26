@@ -136,48 +136,34 @@ const HorizontalWords = () => {
                     <img src="/assets/HorizontalWords SVG/horizontal-words-sticker-phone.svg" className="horizontal-words__sticker-phone" alt="phone sticker" />
                     <svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 140 127" fill="none" className="horizontal-words__arrow-end-svg"><path d="M2.03125 2.42188C100.469 2.42188 130.156 52.4219 118.437 125.078L99.6875 107.891" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" ></path><path d="M2.03125 2.42188C100.469 2.42188 130.156 52.4219 118.438 125.078L137.969 110.234" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" ></path></svg>
 
-                    <h2 className="display horizontal-words__h2" aria-label="We wanna be where the people are">
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>W</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>e</div>
-                        {" "}
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>w</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>a</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>n</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>n</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>a</div>
-                        {" "}
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>b</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>e</div>
-                        {" "}
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>w</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>h</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>e</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>r</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>e</div>
-                        {" "}
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>t</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>h</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>e</div>
-                        {" "}
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>p</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>e</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>o</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>p</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>l</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>e</div>
-                        {" "}
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>a</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>r</div>
-                        <div className="letter" aria-hidden="true" style={{ position: "relative", display: "inline-block" }}>e</div>
+                    {/* Letters are generated rather than hand-written, but the
+                        markup per letter is identical to before — GSAP still
+                        picks each one up through `.letter`. */}
+                    <h2 className="display horizontal-words__h2" aria-label="We build the systems behind the sale">
+                        {'We build the systems behind the sale'.split(' ').map((word, w, all) => (
+                            <span key={`${word}-${w}`}>
+                                {word.split('').map((char, i) => (
+                                    <div
+                                        className="letter"
+                                        aria-hidden="true"
+                                        key={`${char}-${i}`}
+                                        style={{ position: 'relative', display: 'inline-block' }}
+                                    >
+                                        {char}
+                                    </div>
+                                ))}
+                                {w < all.length - 1 ? ' ' : ''}
+                            </span>
+                        ))}
                     </h2>
                 </div>
             </div>
 
             <div className="horizontal-words__bottom-text">
                 <div className="horizontal-words__bottom-text-l">
-                    Audiences are more scattered <em>and</em> more reachable<br />
-                    than ever. We help brands become leaders on the<br />
-                    channels of the new mainstream.
+                    A good website is only the front door. What decides <em>whether</em><br />
+                    you win the job is what happens after someone knocks &mdash;<br />
+                    and that is the part we automate.
                 </div>
             </div>
         </section>

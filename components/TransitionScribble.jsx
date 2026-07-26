@@ -6,11 +6,11 @@ import { ANIMATION_CONFIG } from '@/lib/data';
 
 export default function TransitionScribble() {
     useEffect(() => {
-        const logoTruusClickable = document.querySelector('.logo-truus');
+        const logoClickable = document.querySelector('.logo-aarohiq');
         const transitionScribblePath = document.querySelector('.transition-scribble path');
         const transitionScribbleSvg = document.querySelector('.transition-scribble');
 
-        if (!logoTruusClickable || !transitionScribblePath || !transitionScribbleSvg) return;
+        if (!logoClickable || !transitionScribblePath || !transitionScribbleSvg) return;
 
         const transitionColors = [
             'var(--color-green)', 'var(--color-lightblue)', 'var(--color-darkblue)',
@@ -41,7 +41,7 @@ export default function TransitionScribble() {
                 transitionLogo = document.createElement('div');
                 transitionLogo.className = 'transition-logo';
                 transitionLogo.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); z-index:10000; pointer-events:none; opacity:0; display:flex; justify-content:center; align-items:center; transition: color 0.1s;';
-                const svgClone = document.querySelector('.logo-truus').cloneNode(true);
+                const svgClone = document.querySelector('.logo-aarohiq').cloneNode(true);
                 svgClone.style.width = '150px';
                 svgClone.style.height = 'auto';
                 transitionLogo.appendChild(svgClone);
@@ -82,26 +82,26 @@ export default function TransitionScribble() {
             drawTl.to(transitionLogo, {
                 autoAlpha: 1, duration: durIn * 0.5, ease: 'power2.out',
                 onStart: () => {
-                    gsap.to(transitionLogo.querySelector('svg'), { rotation: 5, duration: 0.15, repeat: -1, yoyo: true, ease: 'steps(1)', overwrite: 'auto' });
+                    gsap.to(transitionLogo.firstElementChild, { rotation: 5, duration: 0.15, repeat: -1, yoyo: true, ease: 'steps(1)', overwrite: 'auto' });
                 }
             }, durIn * 0.5);
 
             drawTl.set(transitionLogo, {
                 autoAlpha: 0,
                 onComplete: () => {
-                    gsap.killTweensOf(transitionLogo.querySelector('svg'));
-                    gsap.set(transitionLogo.querySelector('svg'), { rotation: 0 });
+                    gsap.killTweensOf(transitionLogo.firstElementChild);
+                    gsap.set(transitionLogo.firstElementChild, { rotation: 0 });
                 }
             }, durIn + (durOut * 0.48));
         };
 
-        logoTruusClickable.addEventListener('click', runScribbleAnimation);
+        logoClickable.addEventListener('click', runScribbleAnimation);
 
         // Auto-run on load
         const timer = setTimeout(() => runScribbleAnimation(null), 100);
 
         return () => {
-            logoTruusClickable.removeEventListener('click', runScribbleAnimation);
+            logoClickable.removeEventListener('click', runScribbleAnimation);
             clearTimeout(timer);
         };
     }, []);

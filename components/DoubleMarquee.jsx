@@ -15,18 +15,18 @@ function shuffleArray(array) {
     return shuffled;
 }
 
-function shuffleNoAdjacentSrc(array) {
+function shuffleNoAdjacentName(array) {
     const arr = shuffleArray([...array]);
     for (let i = 1; i < arr.length; i++) {
-        if (arr[i].src === arr[i - 1].src) {
+        if (arr[i].name === arr[i - 1].name) {
             for (let j = i + 1; j < arr.length; j++) {
-                if (arr[j].src !== arr[i - 1].src) { [arr[i], arr[j]] = [arr[j], arr[i]]; break; }
+                if (arr[j].name !== arr[i - 1].name) { [arr[i], arr[j]] = [arr[j], arr[i]]; break; }
             }
         }
     }
-    if (arr[arr.length - 1].src === arr[0].src) {
+    if (arr[arr.length - 1].name === arr[0].name) {
         for (let j = 1; j < arr.length - 1; j++) {
-            if (arr[j].src !== arr[0].src && arr[j].src !== arr[arr.length - 2].src) {
+            if (arr[j].name !== arr[0].name && arr[j].name !== arr[arr.length - 2].name) {
                 [arr[arr.length - 1], arr[j]] = [arr[j], arr[arr.length - 1]]; break;
             }
         }
@@ -49,7 +49,7 @@ function assignColorsNoAdjacent(count, colorPool) {
 function buildMarqueeItems(isMobile) {
     const tracks = [[], []];
     for (let t = 0; t < 2; t++) {
-        const shuffledBrands = shuffleNoAdjacentSrc(brands);
+        const shuffledBrands = shuffleNoAdjacentName(brands);
         const assignedColors = assignColorsNoAdjacent(shuffledBrands.length, colors);
         const items = shuffledBrands.map((brand, i) => ({ brand, color: assignedColors[i] }));
         tracks[t] = isMobile ? items : [...items, ...items]; // duplicate for seamless loop
@@ -94,7 +94,7 @@ export default function DoubleMarquee() {
             {/* Left: Text + Blob */}
             <div className="marquee-left">
                 <div className="marquee-text-container">
-                    <h2>proud to have<br />worked <span className="text-with">with:</span></h2>
+                    <h2>this is what<br />we <span className="text-with">build:</span></h2>
                     <svg xmlns="http://www.w3.org/2000/svg" className="marquee-underline" viewBox="0 0 132 5" fill="none">
                         <path d="M1 2.08377C44.3458 3.90451 87.9791 5.71442 131 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
@@ -122,10 +122,9 @@ export default function DoubleMarquee() {
                         <div className="marquee-track">
                             {trackItems.map((item, i) => (
                                 <div key={i} className="marquee-item" data-brand={item.brand.name} style={{ backgroundColor: item.color }}>
-                                    <div className="marquee-logo">
-                                        <div className="marquee-logo__before"></div>
-                                        <img src={item.brand.src} loading="lazy" alt={item.brand.name} className="cover-image" />
-                                    </div>
+                                    {/* Capability words, not client logos — Aarohiq
+                                        has no cleared client marks to display. */}
+                                    <span className="marquee-word">{item.brand.name}</span>
                                 </div>
                             ))}
                         </div>

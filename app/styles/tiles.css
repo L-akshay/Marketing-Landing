@@ -1,0 +1,92 @@
+/* ─── Owned Tiles ────────────────────────────────────────────────────────────
+   Flat colour tiles that stand in for imagery across two existing sections.
+
+   Both places previously rendered borrowed assets — the motion cards hot-linked
+   another agency's photography, and the marquee showed client logos Aarohiq has
+   no right to display. These replacements use the site's own palette and keep
+   the sections' existing layout and interactions untouched.
+─────────────────────────────────────────────────────────────────────────── */
+
+/* ─── Motion card tiles ─────────────────────────────────────────────────── */
+.motion-card__tile {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    padding: 18px;
+    border-radius: inherit;
+    overflow: hidden;
+}
+
+.motion-card__tile-label {
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-transform: lowercase;
+    color: var(--color-white);
+    mix-blend-mode: normal;
+}
+
+.motion-card__tile--1 {
+    background: linear-gradient(150deg, var(--color-green), #0e3a2f);
+}
+
+.motion-card__tile--2 {
+    background: linear-gradient(150deg, var(--color-lightblue), var(--color-darkblue));
+}
+
+.motion-card__tile--3 {
+    background: linear-gradient(150deg, var(--color-orange), var(--color-maroon));
+}
+
+.motion-card__tile--4 {
+    background: linear-gradient(150deg, var(--color-pink), var(--color-maroon));
+}
+
+/* The lighter tiles need dark type to stay readable. */
+.motion-card__tile--2 .motion-card__tile-label,
+.motion-card__tile--4 .motion-card__tile-label {
+    color: var(--color-dark);
+}
+
+/* ─── Marquee words ─────────────────────────────────────────────────────── */
+.marquee-word {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.8px;
+    text-align: center;
+    text-transform: lowercase;
+    color: var(--color-white);
+}
+
+/* Light marquee swatches flip the type to dark. */
+.marquee-item[style*="lightgreen"] .marquee-word,
+.marquee-item[style*="lightblue"] .marquee-word,
+.marquee-item[style*="pink"] .marquee-word,
+.marquee-item[style*="orange"] .marquee-word {
+    color: var(--color-dark);
+}
+
+@media (max-width: 768px) {
+    .marquee-word {
+        font-size: 1.05rem;
+        letter-spacing: -0.5px;
+    }
+
+    .motion-card__tile-label {
+        font-size: 1.15rem;
+    }
+}

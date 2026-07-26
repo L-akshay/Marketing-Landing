@@ -61,6 +61,22 @@
     height: auto;
 }
 
+/* Aarohiq wordmark — set in the display face at the same optical weight the
+   old logotype carried. */
+.logo-aarohiq {
+    display: inline-block;
+    font-family: 'Epilogue', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 900;
+    letter-spacing: -1.6px;
+    line-height: 1;
+    color: inherit;
+    text-decoration: none;
+    text-transform: lowercase;
+    transform-origin: center center;
+    cursor: url("/assets/Cursor SVG/cursor-pointer.svg") 12 12, pointer;
+}
+
 .logo-truus path,
 .nav-bar__whatsapp-svg path {
     fill: currentColor;
@@ -206,6 +222,37 @@
     background-color: #EBB6F4;
     /* Light pink */
     color: var(--color-dark);
+}
+
+.badge-blue {
+    background-color: var(--color-lightblue);
+    color: var(--color-dark);
+}
+
+.badge-lime {
+    background-color: var(--color-lightgreen);
+    color: var(--color-dark);
+}
+
+/* Work-item thumbnails. Flat colour tiles rather than photography — Aarohiq
+   ships systems, and there is no client imagery cleared for use yet. */
+.nav-work-item__tile {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+}
+
+.nav-work-item__tile--blue {
+    background: linear-gradient(140deg, var(--color-lightblue), var(--color-darkblue));
+}
+
+.nav-work-item__tile--lime {
+    background: linear-gradient(140deg, var(--color-lightgreen), var(--color-green));
+}
+
+.nav-work-item__tile--pink {
+    background: linear-gradient(140deg, var(--color-pink), var(--color-maroon));
 }
 
 .nav-work-title {
